@@ -41,6 +41,14 @@ describe("Part 4: Login and Logout", () => {
     // Verify that the user is redirected to the login page
     cy.url().should("include", "/login");
   });
+  it("Test Case 4: Login With Invalid Credentials", () => {
+    // Use the custom command with wrong credentials
+    cy.login("nonexistent_student@test.com", "WrongPassword123");
+
+    // Verify that an error message is displayed
+    cy.get('.login-form form p').should("be.visible")
+      .and("contain.text", "Your email or password is incorrect!");
+  });
 
   
 });
